@@ -1,13 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import EatingHabits from './components/eatingHabits';
-import InscriptionPage from './components/inscription';
-import LoginScreen from './components/connexion';
 
 export default function App() {
   return (
-    <View>
-      <InscriptionPage></InscriptionPage>
+    <View style={styles.container}>
+      <Text>Open up App.js to start working on your app!</Text>
+      <StatusBar style="auto" />
     </View>
   );
 }
@@ -18,6 +16,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  }
-  
+  },
 });
