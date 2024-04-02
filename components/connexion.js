@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Dimensions, setState } from 'react-native';
 import Screen from '../components/screen';
 import InputField from './inputField';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const { width, height } = Dimensions.get('window');
 
@@ -55,40 +58,53 @@ const SignupText = () => {
     </TouchableOpacity>
   );
 };
+_storeData = async () => {
+  
+};
 
 const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
 
-const handleLogin = async () => {
-  console.log(username, password);
-  try {
-    const response = await fetch('http://localhost:8080/user/connection', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username, 
-        password,
-      }),
-    });
+  const handleLogin = async () => {
+    console.log(username, password);
+    try {
+      const response = await fetch('http://localhost:8080/user/connection', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({//9
+          username,
+          password,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Erreur lors de la requête');
+      }
+  
+      // Réponse de l'API
+      const data = await response.json();
+      console.log('Réponse de l\'API:', data);
+  
+      // Rediriger uniquement si la réponse de l'API indique une connexion réussie
+      if (data.code === 200 && data.success === true) {
+        await AsyncStorage.setItem('@KosherKare:token', data.token,
+        ()=> AsyncStorage.getItem('@KosherKare:token'), (err, response)=> {console.log(response)});
+        navigation.navigate('Form');
+        
+      }else {
+        console.log(data.message)
+      }
 
-    if (!response.ok) {
-      throw new Error('Erreur lors de la requête');
+  
+    } catch (error) {
+      console.error('Erreur lors de la requête:', error);
     }
-
-    // Réponse de l'API
-    const data = await response.json();
-    console.log('Réponse de l\'API:', data);
-
-    // Ne réinitialise pas les champs après la connexion
-    // setUsername('');
-    // setPassword('');
-  } catch (error) {
-    console.error('Erreur lors de la requête:', error);
-  }
-};
+  };
+  
 
   return (
     <Screen>

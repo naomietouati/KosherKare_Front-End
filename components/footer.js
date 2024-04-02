@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around', // Espace égal entre les icônes
     alignItems: 'center', // Centrer le contenu verticalement
     width: '100%', 
+
   },
   iconButton: {
     padding: 10, 

@@ -1,0 +1,252 @@
+[
+    {
+      "id": "1",
+      "question": "Mangez-vous le matin ?",
+      "type": "checkbox",
+      "nextStepIfYes": "1.1",
+      "nextStepIfNo": "2",
+      "subQuestions": [
+        {
+          "id": "1.1",
+          "question": "Que mangez-vous le matin ?",
+          "type": "multiselect",
+          "options": ["Pain", "Fromage", "Beurre"]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "question": "Mangez-vous le midi ?",
+      "type": "checkbox",
+      "nextStepIfYes": "2.1",
+      "nextStepIfNo": "3",
+      "subQuestions": [
+        {
+          "id": "2.1",
+          "question": "Qu'avez-vous mangé à midi ?",
+          "type": "textinput"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "question": "Mangez-vous le soir ?",
+      "type": "checkbox",
+      "nextStepIfYes": "3.1",
+      "nextStepIfNo": "4",
+      "subQuestions": [
+        {
+          "id": "3.1",
+          "question": "Qu'avez-vous mangé le soir ?",
+          "type": "textinput"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "question": "Faites-vous des collations ?",
+      "type": "checkbox",
+      "nextStepIfYes": "4.1",
+      "nextStepIfNo": "5",
+      "subQuestions": [
+        {
+          "id": "4.1",
+          "question": "Quels sont vos en-cas habituels ?",
+          "type": "multiselect",
+          "options": ["Fruits", "Yaourt", "Barres de céréales"]
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "question": "Avez-vous des grignotages entre les repas ?",
+      "type": "checkbox",
+      "nextStepIfYes": "5.1",
+      "nextStepIfNo": "6",
+      "subQuestions": []
+    },
+    {
+      "id": "6",
+      "question": "Pratiquez-vous une activité physique régulière ?",
+      "type": "checkbox",
+      "nextStepIfYes": "6.1",
+      "nextStepIfNo": "7",
+      "subQuestions": []
+    },
+    {
+      "id": "6.1",
+      "question": "Quel type d'exercice pratiquez-vous ?",
+      "type": "textinput",
+      "subQuestions": []
+    },
+    {
+      "id": "7",
+      "question": "Quelle est votre profession ?",
+      "type": "textinput",
+      "subQuestions": []
+    },
+ 
+    {
+        "id": "8",
+        "question": "Fumez-vous du tabac ?",
+        "type": "checkbox",
+        "nextStepIfYes": "8.1",
+        "nextStepIfNo": "9",
+        "subQuestions": [
+          {
+            "id": "8.1",
+            "question": "Combien de cigarettes fumez-vous par jour ?",
+            "type": "textinput"
+          }
+        ]
+    },
+    {
+        "id": "9",
+        "question": "Consommez-vous de l'alcool ?",
+        "type": "checkbox",
+        "nextStepIfYes": "9.1",
+        "nextStepIfNo": "10",
+        "subQuestions": [
+          { 
+            "id": "9.1",
+            "question": "Quelle est votre consommation hebdomadaire d'alcool ?",
+            "type": "textinput"
+          }
+        ]
+    },
+    {
+        "id": "10",
+        "question": "Êtes-vous souvent stressé(e) ?",
+        "type": "checkbox",
+        "nextStepIfYes": "10.1",
+        "nextStepIfNo": "11",
+        "subQuestions": [
+          {
+            "id": "9.1",
+            "question": "Quelle est votre consommation hebdomadaire d'alcool ?",
+            "type": "textinput"
+          }
+        ]
+    },
+    {
+        "id": "11",
+        "question": "Quel type de portions de nourriture consommez-vous habituellement ?",
+        "type": "multiselect",
+        "options": ["Petite", "Moyenne", "Grande"],
+        "subQuestions": []
+    },
+    {
+        "id": "12",
+        "question": "Combien de fois par semaine mangez-vous dans des fast-foods ?",
+        "type": "textinput",
+        "subQuestions": []
+    },
+    {
+        "id": "13",
+        "question": "Avez-vous des problèmes de transit intestinal ?",
+        "type": "checkbox",
+        "nextStepIfYes": "13.1",
+        "nextStepIfNo": "14",
+        "subQuestions": [
+          {
+            "id": "13.1",
+            "question": "Quels sont les symptômes que vous rencontrez ?",
+            "type": "multiselect",
+            "options": ["Constipation", "Diarrhée", "Ballonnements"]
+          }
+        ]
+    },
+    {
+        "id": "14",
+        "question": "Avez-vous recours à la sous-traitance alimentaire ?",
+        "type": "checkbox",
+        "nextStepIfYes": "14.1",
+        "nextStepIfNo": "15",
+        "subQuestions": [
+          {
+            "id": "14.1",
+            "question": "Quels aliments sous-traitez-vous généralement ?",
+            "type": "multiselect",
+            "options": ["Repas complets", "Pâtisseries", "Plats cuisinés"]
+          }
+        ]
+    },
+    {
+        "id": "15",
+        "question": "Quelle est votre taille ? (en cm)",
+        "type": "textinput",
+        "subQuestions": []
+    },
+    {
+        "id": "16",
+        "question": "Quel est votre sexe ?",
+        "type": "checkbox",
+        "nextStepIfYes": "16.1",
+        "nextStepIfNo": "17",
+        "subQuestions": [
+          {
+          "id": "16.1",
+          "question": "Identifiez-vous comme étant homme, femme ou autre ?",
+          "type": "textinput"
+        }]
+    },
+    {
+        "id": "17",
+        "question": "Quel est votre poids initial ? (en kg)",
+        "type": "textinput",
+        "subQuestions": []
+    },
+    {
+        "id": "18",
+        "question": "Avez-vous des allergies ou des intolérances alimentaires ?",
+        "type": "checkbox",
+        "nextStepIfYes": "18.1",
+        "nextStepIfNo": "19",
+        "subQuestions": [
+          {
+            "id": "18.1",
+            "question": "Quels sont les aliments auxquels vous êtes allergique ou intolérant ?",
+            "type": "multiselect",
+            "options": ["Lactose", "Gluten", "Arachides"]
+          }
+        ]
+    },
+    {
+        "id": "19",
+        "question": "Quels sont vos goûts alimentaires préférés ?",
+        "type": "textinput",
+        "subQuestions": []
+    },
+    {
+        "id": "20",
+        "question": "Combien de repas prenez-vous pendant Chabbat ?",
+        "type": "textinput",
+        "subQuestions": []
+    },
+    {
+        "id": "21",
+        "question": "Quelle est la quantité de tranches de pain que vous consommez pendant Chabbat ?",
+        "type": "textinput",
+        "subQuestions": []
+    },
+    {
+        "id": "22",
+        "question": "Quelle est la quantité de salades cuites riches en huile que vous consommez pendant Chabbat ?",
+        "type": "textinput",
+        "subQuestions": []
+    },
+    {
+        "id": "23",
+        "question": "Quel est le plat principal que vous consommez pendant Chabbat ?",
+        "type": "textinput",
+        "subQuestions": []
+    },
+    {
+        "id": "24",
+        "question": "Quel est le dessert que vous consommez pendant Chabbat ?",
+        "type": "textinput",
+        "subQuestions": []
+    }
+    ]
+      
+  

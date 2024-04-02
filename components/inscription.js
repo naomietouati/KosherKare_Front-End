@@ -13,6 +13,11 @@ const InscriptionPage = () => {
   const [password, setPassword] = useState('');
 
   const handleInscription = async () => {
+    if (!firstName || !lastName || !email || !phoneNumber || !password) {
+      console.error('Veuillez remplir tous les champs');
+      return;
+    }
+  
     try {
       const response = await fetch('http://localhost:8080/user/registration', {
         method: 'POST',
@@ -27,7 +32,6 @@ const InscriptionPage = () => {
           password,
         }),
       });
-      console.log(firstName,lastName,email)
   
       if (!response.ok) {
         throw new Error('Erreur lors de la requête');
@@ -42,11 +46,12 @@ const InscriptionPage = () => {
     }
   };
   
+  
   return (
     <View>
       <Screen>
         <Title text="Inscription" />
-        <InputField placeholder="First Name" value={firstName} onChangeText={setFirstName} />
+        <InputField placeholder="First Name" value={firstName} onChangeText={setFirstName}/>
         <InputField placeholder="Last Name" value={lastName} onChangeText={setLastName} />
         <InputField placeholder="Email Address" value={email} onChangeText={setEmail} />
         <InputField placeholder="Phone Number" value={phoneNumber} onChangeText={setPhoneNumber} />

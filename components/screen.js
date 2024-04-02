@@ -5,7 +5,7 @@ const { height } = Dimensions.get('window');
 
 const Screen = ({ children }) => {
   return (
-    <ScrollView contentContainerStyle={styles.screen}>
+    <ScrollView contentContainerStyle={[styles.screen, { height }]}>
       {children}
     </ScrollView>
   );
@@ -14,10 +14,6 @@ const Screen = ({ children }) => {
 const styles = StyleSheet.create({
   screen: {
     backgroundColor: '#161616',
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: height * 0.1,
   },
 });
 
