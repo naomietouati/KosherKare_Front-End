@@ -93,7 +93,7 @@ const LoginScreen = () => {
       if (data.code === 200 && data.success === true) {
         await AsyncStorage.setItem('@KosherKare:token', data.token,
         ()=> AsyncStorage.getItem('@KosherKare:token'), (err, response)=> {console.log(response)});
-        navigation.navigate('Form');
+        navigation.navigate('form');
         
       }else {
         console.log(data.message)

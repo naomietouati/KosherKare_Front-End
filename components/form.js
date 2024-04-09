@@ -7,25 +7,25 @@ import ImageButton from './imageButton';
 import Screen from './screen';
 
 const Form = () => {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState({});
+  const [currentQuestionId, setCurrentQuestionId] = useState("1");
+  const [answers, setAnswers] = useState([]);
 
-  const currentQuestion = questionsData[currentQuestionIndex];
+  const currentQuestion = questionsData.find(question => question.id === currentQuestionId);
 
-  const handleNextQuestion = () => {
-    if (currentQuestionIndex < questionsData.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    }
+  const handleAnswer = (questionId, response) => {
+    setAnswers([...answers, { id: questionId, response: response }]);
   };
 
-  const handlePreviousQuestion = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
-    }
+  const QuestionSuivante = () => {
+    const index = questionsData.findIndex(question => question.id === currentQuestionId);
+    const response = answers.find(answer => answer.id === currentQuestionId)?.response;
+    const nextQuestionId = response === 'Oui' ? currentQuestion.nextStepIfYes : currentQuestion.nextStepIfNo;
+    setCurrentQuestionId(nextQuestionId || questionsData[index + 1]?.id);
   };
-
-  const handleAnswer = (questionId, answer) => {
-    setAnswers({ ...answers, [questionId]: answer });
+  
+  const QuestionPrecedente = () => {
+    const index = questionsData.findIndex(question => question.id === currentQuestionId);
+    setCurrentQuestionId(questionsData[index - 1]?.id);
   };
 
   const renderQuestion = () => {
@@ -65,13 +65,35 @@ const Form = () => {
     }
   };
 
+  const envoyerReponsesAPI = async () => {
+    try {
+      // Envoyer les réponses à votre API ici
+      const reponseAPI = await fetch('http://localhost:8080/EatingsHabits/initialization', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(answers),
+      });
+
+      if (!reponseAPI.ok) {
+        throw new Error('Erreur lors de l\'envoi des réponses à l\'API');
+      }
+
+      console.log('Réponses envoyées avec succès à l\'API');
+    } catch (erreur) {
+      console.error('Erreur lors de l\'envoi des réponses à l\'API:', erreur);
+    }
+  };
+
   return (
     <View>
       <Screen>
         {renderQuestion()}
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Button title="Précédent" onPress={handlePreviousQuestion} disabled={currentQuestionIndex === 0} />
-          <Button title="Suivant" onPress={handleNextQuestion} disabled={currentQuestionIndex === questionsData.length - 1} />
+          <Button title="Précédent" onPress={QuestionPrecedente} />
+          <Button title="Suivant" onPress={QuestionSuivante} />
+          <Button title="Envoyer réponses" onPress={envoyerReponsesAPI} />
         </View>
       </Screen>
     </View>

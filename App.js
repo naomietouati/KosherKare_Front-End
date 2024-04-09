@@ -15,13 +15,14 @@ const MyStack = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Configurations des habitudes alimentaires"
-          component={Form}
-        />
+            name="Configurations des habitudes alimentaires"
+            component={Form}
+            />
          <Stack.Screen
           name="LoginScreen"
           component={LoginScreen}
-        />
+        />  
+     
         <Stack.Screen
           name="Inscription"
           component={InscriptionPage}
