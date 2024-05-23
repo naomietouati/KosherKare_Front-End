@@ -14,32 +14,12 @@ const MyStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-            name="Configurations des habitudes alimentaires"
-            component={Form}
-            />
-         <Stack.Screen
-          name="LoginScreen"
-          component={LoginScreen}
-        />  
-     
-        <Stack.Screen
-          name="Inscription"
-          component={InscriptionPage}
-        />
-         <Stack.Screen
-          name="Accueil"
-          component={Accueil}
-        />
-        <Stack.Screen
-          name="EatingHabits"
-          component={EatingHabits}
-        />
-          <Stack.Screen
-          name="QuestionComponent"
-          component={QuestionComponent}
-        />
-
+        <Stack.Screen name="Inscription" component={InscriptionPage} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Form" component={Form} />
+        <Stack.Screen name="Accueil" component={Accueil} />
+        <Stack.Screen name="EatingHabits" component={EatingHabits} />
+        
         {/*
         <Stack.Screen
           name="PhysicalActivity"

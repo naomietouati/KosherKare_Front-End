@@ -14,6 +14,7 @@ const Screen = ({ children }) => {
 const styles = StyleSheet.create({
   screen: {
     backgroundColor: '#161616',
+    alignItems: 'center', // Ajoutez cette ligne pour centrer horizontalement les éléments
   },
 });
 

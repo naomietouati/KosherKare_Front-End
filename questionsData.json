@@ -23,7 +23,7 @@
   },
   {
       "id": "4",
-      "question": "Qu'avez-vous mangé à midi ?",
+      "question": "Que mangez-vous le midi ?",
       "type": "textinput",
       "nextStepIfYes": "5",
       "nextStepIfNo": "5"

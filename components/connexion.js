@@ -5,7 +5,6 @@ import InputField from './inputField';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 const { width, height } = Dimensions.get('window');
 
 const ImageComponent = ({ image }) => {
@@ -68,14 +67,17 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   const handleLogin = async () => {
-    console.log(username, password);
+    console.log(JSON.stringify({
+      username,
+      password,
+    }));
     try {
       const response = await fetch('http://localhost:8080/user/connection', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({//9
+        body: JSON.stringify({
           username,
           password,
         }),
@@ -91,20 +93,19 @@ const LoginScreen = () => {
   
       // Rediriger uniquement si la réponse de l'API indique une connexion réussie
       if (data.code === 200 && data.success === true) {
-        await AsyncStorage.setItem('@KosherKare:token', data.token,
-        ()=> AsyncStorage.getItem('@KosherKare:token'), (err, response)=> {console.log(response)});
-        navigation.navigate('form');
-        
-      }else {
-        console.log(data.message)
-      }
-
-  
-    } catch (error) {
-      console.error('Erreur lors de la requête:', error);
+        await AsyncStorage.setItem('@KosherKare:token', data.token);
+        if (data.has_eating_habits) {
+            navigation.navigate('Form');
+        } else {
+            navigation.navigate('Accueil');
+        }
+    } else {
+        console.log(data.message);
     }
+  } catch (error) {
+      console.error(error);
+  }
   };
-  
 
   return (
     <Screen>
