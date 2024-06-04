@@ -41,7 +41,7 @@ const InscriptionPage = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/user/registration', {
+      const response = await fetch('https://sleepy-spire-97484-af451f5eda35.herokuapp.com/user/registration', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,6 +61,7 @@ const InscriptionPage = () => {
 
       const data = await response.json();
       console.log('Réponse de l\'API :', data);
+      navigation.navigate('Login');
       // Traitez la réponse de l'API ici
     } catch (error) {
       console.error('Erreur lors de l\'inscription :', error.message);

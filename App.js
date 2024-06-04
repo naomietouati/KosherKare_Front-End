@@ -6,7 +6,7 @@ import EatingHabits from './components/eatingHabits';
 import LoginScreen from './components/connexion';
 import InscriptionPage from './components/inscription';
 import Form from './components/form';
-import QuestionComponent from './components/question';
+import Profile from './components/profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,12 +14,12 @@ const MyStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Inscription" component={InscriptionPage} />
         <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Form" component={Form} />
+        <Stack.Screen name="Inscription" component={InscriptionPage} />
         <Stack.Screen name="Accueil" component={Accueil} />
         <Stack.Screen name="EatingHabits" component={EatingHabits} />
-        
+        <Stack.Screen name="Form" component={Form} />
+        <Stack.Screen name="Profile" component={Profile}/>
         {/*
         <Stack.Screen
           name="PhysicalActivity"

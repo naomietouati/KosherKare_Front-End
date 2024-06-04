@@ -3,7 +3,7 @@ import { View, StyleSheet, Dimensions, Text, TouchableOpacity } from 'react-nati
 import Screen from './screen';
 import Footer from './footer';
 import { useNavigation } from '@react-navigation/native'; // Importez useNavigation depuis @react-navigation/native
-import Card from './card'; // Importez le composant Card
+import Card from './card';
 
 const { width, height } = Dimensions.get('window');
 
@@ -14,7 +14,6 @@ const Accueil = ({ children, userName }) => {
     <View>
       <Screen>
         <Text style={styles.welcomeText}>Bienvenue {userName}</Text>
-
         <Card text="Mes Habitudes Alimentaires" onPress={() => navigation.navigate('EatingHabits')} />
         <Card text="Mon Activité Physique" onPress={() => navigation.navigate('PhysicalActivity')} />
         <Card text="Mon Evolution" onPress={() => navigation.navigate('Evolution')} />
@@ -23,7 +22,6 @@ const Accueil = ({ children, userName }) => {
         <Card text="Idées Repas" onPress={() => navigation.navigate('MealIdeas')} />
         <Card text="Profil" onPress={() => navigation.navigate('Profile')} />
         <Card text="Mon Menu de la Semaine" onPress={() => navigation.navigate('WeeklyMenu')} />
-        <Footer></Footer>
       </Screen>
     </View>
   );

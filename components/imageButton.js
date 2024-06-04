@@ -1,12 +1,31 @@
 import React from 'react';
-import { View, TouchableOpacity, Image } from 'react-native';
+import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 
-const ImageButton = ({ imageSource, onPress }) => {
+const ImageButton = ({ imageSource, onPress, isSelected }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <Image source={imageSource} style={{ width: 100, height: 100 }} />
+    <TouchableOpacity onPress={onPress} style={[styles.button, isSelected && styles.selectedButton]}>
+      <Image source={imageSource} style={[styles.image, isSelected && styles.selectedImage]} />
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  button: {
+    margin: 10,
+    borderWidth: 2,
+    borderColor: 'transparent',
+  },
+  selectedButton: {
+    borderColor: 'green',
+  },
+  image: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+  },
+  selectedImage: {
+    opacity: 0.5,
+  },
+});
 
 export default ImageButton;
