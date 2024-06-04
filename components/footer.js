@@ -1,14 +1,15 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
 
 const Footer = () => {
   const handleHomePress = () => {
-    // Logique à exécuter lors du clic sur l'icône de la maison
+    useNavigation.navigate('Accueil');
   };
 
   const handleUserPress = () => {
-    // Logique à exécuter lors du clic sur l'icône de l'utilisateur
+    useNavigation.navigate('Profile');
   };
 
   return (

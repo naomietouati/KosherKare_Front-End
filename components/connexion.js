@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Dimensions, setState } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions, Alert } from 'react-native';
 import Screen from '../components/screen';
 import InputField from './inputField';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 
 const { width, height } = Dimensions.get('window');
 
@@ -51,15 +50,12 @@ const LoginButton = ({ onPress }) => {
   );
 };
 
-const SignupText = () => {
+const SignupText = ({ onPress }) => {
   return (
-    <TouchableOpacity style={styles.signupContainer}>
+    <TouchableOpacity style={styles.signupContainer} onPress={onPress}>
       <Text style={styles.signupText}>Vous n'avez pas de compte ? Inscrivez-vous</Text>
     </TouchableOpacity>
   );
-};
-_storeData = async () => {
-  
 };
 
 const LoginScreen = () => {
@@ -67,44 +63,67 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const token = await AsyncStorage.getItem('@KosherKare:token');
+        if (token) {
+          const response = await fetch('https://sleepy-spire-97484-af451f5eda35.herokuapp.com/user/check-session', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': token,
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            if (data.success) {
+              if (data.hasEatingHabits) {
+                navigation.navigate('Accueil');
+              } else {
+                navigation.navigate('Form');
+              }
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Erreur lors de la vérification de la session:', error);
+      }
+    };
+
+    checkSession();
+  }, []);
+
   const handleLogin = async () => {
-    console.log(username, password);
     try {
-      const response = await fetch('http://localhost:8080/user/connection', {
+      const response = await fetch('https://sleepy-spire-97484-af451f5eda35.herokuapp.com/user/connection', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({//9
-          username,
-          password,
-        }),
+        body: JSON.stringify({ username, password }),
       });
-  
+
       if (!response.ok) {
         throw new Error('Erreur lors de la requête');
       }
-  
-      // Réponse de l'API
-      const data = await response.json();
-      console.log('Réponse de l\'API:', data);
-  
-      // Rediriger uniquement si la réponse de l'API indique une connexion réussie
-      if (data.code === 200 && data.success === true) {
-        await AsyncStorage.setItem('@KosherKare:token', data.token,
-        ()=> AsyncStorage.getItem('@KosherKare:token'), (err, response)=> {console.log(response)});
-        navigation.navigate('form');
-        
-      }else {
-        console.log(data.message)
-      }
 
-  
+      const data = await response.json();
+      if (data.code === 200 && data.success) {
+        await AsyncStorage.setItem('@KosherKare:token', data.token);
+        if (data.hasEatingHabits) {
+          navigation.navigate('Accueil');
+        } else {
+          navigation.navigate('Form');
+        }
+      } else {
+        Alert.alert('Erreur', data.message);
+      }
     } catch (error) {
-      console.error('Erreur lors de la requête:', error);
+      console.error('Erreur lors de la connexion:', error);
     }
   };
-  
 
   return (
     <Screen>
@@ -115,7 +134,7 @@ const LoginScreen = () => {
       <InputField placeholder="Password" secureTextEntry value={password} onChangeText={setPassword} />
       <ForgotPasswordText />
       <LoginButton onPress={handleLogin} />
-      <SignupText />
+      <SignupText onPress={() => navigation.navigate('Inscription')} />
     </Screen>
   );
 };
@@ -136,21 +155,6 @@ const styles = StyleSheet.create({
     fontSize: width * 0.04,
     fontFamily: 'Arial',
     marginBottom: height * 0.04,
-  },
-  inputContainer: {
-    marginBottom: height * 0.03,
-    width: '80%',
-  },
-  input: {
-    backgroundColor: '#121212',
-    color: '#ffffff',
-    fontSize: width * 0.04,
-    fontFamily: 'Arial',
-    paddingVertical: height * 0.02,
-    paddingHorizontal: width * 0.05,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#323232',
   },
   forgotPasswordContainer: {
     alignSelf: 'flex-end',

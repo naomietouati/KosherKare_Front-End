@@ -1,16 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const CheckBox = ({ label, onPress }) => {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const toggleCheck = () => {
-    setIsChecked(!isChecked);
-    onPress && onPress(!isChecked);
-  };
-
+const CheckBox = ({ label, isChecked, onPress }) => {
   return (
-    <TouchableOpacity onPress={toggleCheck}>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <View style={[styles.checkBox, isChecked && styles.checkedBox]} />
         <Text style={styles.label}>{label}</Text>
